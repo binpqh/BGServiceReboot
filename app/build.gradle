@@ -1,0 +1,47 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'cnt.pqh.BGServices'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "cnt.pqh.BGServices"
+        minSdk 25
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+//        ndk.abiFilters("arm64-v8a","armeabi","armeabi-v7a","mips","mips64","x86","x86_64")
+//        ndk.abiFilters "arm64-v8a","armeabi","armeabi-v7a","mips","mips64","x86","x86_64"
+        ndk {
+            abiFilters 'armeabi', 'x86', 'armeabi-v7a'
+        }
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    dependenciesInfo {
+        includeInApk true
+        includeInBundle true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+    implementation fileTree(dir: 'jniLibs', include: ['*.so'])
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.9.0'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+}
